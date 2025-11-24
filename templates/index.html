@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Hepatitis</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="card">
+
+        <h2>Diagnóstico de Hepatitis</h2>
+        <p class="sub">Modelo de Predicción IA • Regresión Logística</p>
+
+        <form action="/predecir" method="POST">
+
+            {% for feature in features %}
+                <div class="group">
+                    <label>{{ traducciones.get(feature, feature) }}</label>
+                    <input type="number" step="any" name="{{ feature }}" required>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn">Generar Predicción</button>
+        </form>
+
+        {% if resultado is defined %}
+        <div class="resultado">
+            <h3>Resultado</h3>
+            <p><b>Predicción:</b> {{ resultado }}</p>
+            <p><b>Probabilidad aproximada:</b> {{ prob }}%</p>
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
